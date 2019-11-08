@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.itheima.health.dao.SetmealDao">
+    <!--新增-->
+    <insert id="insert" parameterType="com.itheima.health.pojo.Setmeal">
+        <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into t_setmeal
+        (code,name,sex,age,helpCode,price,remark,attention,img)
+        values
+        (#{code},#{name},#{sex},#{age},#{helpCode},#{price},#{remark},#{attention},#{img})
+    </insert>
+
+    <!--绑定套餐和检查组多对多关系-->
+    <insert id="setSetmealAndCheckGroup" parameterType="hashmap">
+        insert into t_setmeal_checkgroup
+        (setmeal_id,checkgroup_id)
+        values
+        (#{setmealId},#{checkGroupId})
+    </insert>
+
+    <select id="queryString" parameterType="string" resultType="com.itheima.health.pojo.Setmeal">
+        select * from t_setmeal
+        <if test="value != null and value.length>0 ">
+            where code = #{value} or name = #{value}
+        </if>
+    </select>
+
+    <!--根據id查詢套餐-->
+    <select id="findById" parameterType="int" resultType="com.itheima.health.pojo.Setmeal">
+        select * from t_setmeal where id=#{id}
+    </select>
+
+    <!--查询新增套餐中所对应的检查组id-->
+    <select id="findCheckGroupIdsBySetmealId" resultType="int" parameterType="int">
+      select checkgroup_id from t_setmeal_checkgroup where setmeal_id=#{id}
+    </select>
+
+    <!--清楚表与表之间的关系-->
+    <delete id="deleteSetmealAndCheckGroup" parameterType="int">
+        DELETE FROM t_setmeal_checkgroup where setmeal_id=#{id}
+    </delete>
+
+    <!--重新编辑-->
+    <update id="edit" parameterType="com.itheima.health.pojo.Setmeal">
+        update t_setmeal
+        <set>
+            <if test="name != null">
+                name = #{name},
+            </if>
+            <if test="code != null">
+                code = #{code},
+            </if>
+            <if test="helpCode != null">
+                helpCode = #{helpCode},
+            </if>
+            <if test="sex != null">
+                sex = #{sex},
+            </if>
+            <if test="age != null">
+                age = #{age},
+            </if>
+            <if test="price != null">
+                price = #{price},
+            </if>
+            <if test="remark != null">
+                remark = #{remark},
+            </if>
+            <if test="attention != null">
+                attention = #{attention},
+            </if>
+            <if test="img != null">
+                img = #{img},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--查询该id是否被引用-->
+    <select id="findSetmealIdBy" parameterType="int" resultType="long">
+        select count(setmeal_id) from t_setmeal_checkgroup where setmeal_id=#{id}
+    </select>
+
+    <!--删除-->
+    <delete id="delete" parameterType="int">
+        delete from t_setmeal where id=#{id}
+    </delete>
+
+</mapper>
