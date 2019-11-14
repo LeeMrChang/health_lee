@@ -435,6 +435,7 @@
                     //请求
                     axios.post('/setmeal/page.do',param).then(res=>{
 
+                        console.log(res)
                         this.dataList = res.data.rows;
                         this.pagination.total = res.data.total;
                     })
