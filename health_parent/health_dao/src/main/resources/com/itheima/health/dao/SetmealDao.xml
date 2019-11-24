@@ -28,8 +28,23 @@
         </if>
     </select>
 
-    <!--根據id查詢套餐-->
-    <select id="findById" parameterType="int" resultType="com.itheima.health.pojo.Setmeal">
+    <!--根據id查詢套餐,传递套餐id，获取套餐分组相关信息-->
+    <resultMap id="findByIdResultMap" type="com.itheima.health.pojo.Setmeal">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="code" property="code"/>
+        <result column="helpCode" property="helpCode"/>
+        <result column="sex" property="sex"/>
+        <result column="age" property="age"/>
+        <result column="price" property="price"/>
+        <result column="remark" property="remark"/>
+        <result column="attention" property="attention"/>
+        <result column="img" property="img"/>
+        <!--表示多对多查询，column中的id为传递id查询-->
+        <collection property="checkGroups" column="id"
+         select="com.itheima.health.dao.CheckGroupDao.findCheckGroupListById"></collection>
+    </resultMap>
+    <select id="findById" parameterType="int" resultMap="findByIdResultMap">
         select * from t_setmeal where id=#{id}
     </select>
 
@@ -87,5 +102,10 @@
     <delete id="delete" parameterType="int">
         delete from t_setmeal where id=#{id}
     </delete>
+
+    <!--查询套餐列表-->
+    <select id="findAll" resultType="com.itheima.health.pojo.Setmeal">
+        SELECT * from t_setmeal
+    </select>
 
 </mapper>

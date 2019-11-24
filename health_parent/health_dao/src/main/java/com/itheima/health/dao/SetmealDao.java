@@ -76,4 +76,9 @@ public interface SetmealDao {
      */
     void delete(Integer id);
 
+    /**
+     * 查询套餐列表
+     * @return
+     */
+    List<Setmeal> findAll();
 }

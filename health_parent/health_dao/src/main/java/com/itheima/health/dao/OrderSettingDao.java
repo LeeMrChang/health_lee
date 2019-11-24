@@ -47,4 +47,10 @@ public interface OrderSettingDao {
      */
     List<OrderSetting> getOrderSettingByMonth(@Param("beginDate") String beginDate,
                                               @Param("endDate") String endDate);
+
+    long findCountByOrderDate(Date orderDate);
+
+    void editNumberByOrderDate(OrderSetting orderSetting);
+
+
 }

@@ -67,4 +67,20 @@
          select * from t_checkitem
     </select>
 
+    <resultMap id="findByIdResultMap" type="com.itheima.health.pojo.CheckItem">
+        <id column="id" property="id"></id>
+        <result column="code" property="code"></result>
+        <result column="name" property="name"></result>
+        <result column="sex" property="sex"></result>
+        <result column="age" property="age"></result>
+        <result column="price" property="price"></result>
+        <result column="type" property="type"></result>
+        <result column="remark" property="remark"></result>
+        <result column="attention" property="attention"></result>
+    </resultMap>
+    <select id="findCheckItemListById" resultMap="findByIdResultMap">
+        select * from t_checkitem  where id
+    in (select checkitem_id from t_checkgroup_checkitem where checkgroup_id=#{id})
+    </select>
+
 </mapper>

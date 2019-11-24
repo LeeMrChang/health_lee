@@ -32,6 +32,7 @@ public class ClearImgJob {
 
         Iterator<String> iterator = setList.iterator();
 
+
         while (iterator.hasNext()){
             String pic = iterator.next();
             System.out.println("删除图片的名称是："+pic);

@@ -33,6 +33,22 @@ public class OrderSettingController {
     @Reference
     private OrderSettingService orderSettingService;
 
+
+    /**
+     *
+     */
+    @RequestMapping("/editNumberByDate")
+    public Result editNumberByDate(@RequestBody OrderSetting orderSetting){
+
+        try {
+            orderSettingService.editNumberByDate(orderSetting);
+        } catch (Exception e) {
+            return new Result(false,MessageConstant.ORDERSETTING_FAIL);
+        }
+
+        return new Result(true,MessageConstant.ORDERSETTING_SUCCESS);
+    }
+
     /**
      * 根据传过来的年和月份查询预约表的
      * 可预约人数、已预约人数、当月日期

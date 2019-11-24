@@ -136,4 +136,14 @@ public class SetmealServiceImpl implements SetmealService {
 
         setmealDao.delete(id);
     }
+
+    /**
+     * 查询套餐列表
+     *
+     * @return
+     */
+    @Override
+    public List<Setmeal> findAll() {
+        return setmealDao.findAll();
+    }
 }

@@ -15,6 +15,7 @@
         <module>health_service</module>
         <module>health_web</module>
         <module>health_jobs</module>
+        <module>healthmobile_web</module>
     </modules>
 
     <!--打包，父包-->

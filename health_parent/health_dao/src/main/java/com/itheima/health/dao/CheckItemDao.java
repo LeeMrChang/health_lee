@@ -53,4 +53,11 @@ public interface CheckItemDao {
     void updateCheckItemBy(CheckItem checkItem);
 
     List<CheckItem> findAll();
+
+    /**
+     * 多对多查询
+     * @param id
+     * @return
+     */
+    List<CheckItem> findCheckItemListById(Integer id);
 }

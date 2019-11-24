@@ -29,4 +29,10 @@ public interface OrderSettingService {
      * @return
      */
     List<Map> getOrderSettingByMonth(String date);
+
+    /**
+     * 设置预约人数
+     * @param orderSetting
+     */
+    void editNumberByDate(OrderSetting orderSetting);
 }
