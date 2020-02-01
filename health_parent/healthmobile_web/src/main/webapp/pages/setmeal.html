@@ -55,6 +55,9 @@
             axios.post("/setmeal/getSetmeal.do").then((response)=>{
                 if(response.data.flag){
                     this.setmealList = response.data.data;
+                }else {
+                    //弹出错误提示信息
+                    this.$message.error(res.data.message);
                 }
             });
         }
