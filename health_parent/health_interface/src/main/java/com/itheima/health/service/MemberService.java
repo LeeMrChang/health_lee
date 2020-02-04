@@ -1,5 +1,7 @@
 package com.itheima.health.service;
 
+import com.itheima.health.pojo.Member;
+
 /**
  * @ClassName:SetmealService
  * @Author：Mr.lee
@@ -10,4 +12,7 @@ package com.itheima.health.service;
 public interface MemberService {
 
 
+    void add(Member member);
+
+    Member findByTelephone(String telephone);
 }
