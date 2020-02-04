@@ -5,7 +5,6 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.apache.poi.xssf.usermodel.helpers.XSSFXmlColumnPr;
 import org.junit.Test;
 
 import java.io.FileOutputStream;
@@ -20,12 +19,12 @@ import java.io.IOException;
  */
 public class TestPOI {
 
-    /**
+   /* *//**
      * 1、获取工作簿
      * 2、获取表名
      * 3、获取行
      * 4、获取单元格
-     */
+     *//*
     @Test
     public void exportExcel() throws IOException {
 
@@ -104,6 +103,6 @@ public class TestPOI {
         out.close();
         workbook.close();
     }
-
+*/
 
 }
