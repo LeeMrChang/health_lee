@@ -32,10 +32,18 @@
     <update id="editNumberByOrderDate" parameterType="com.itheima.health.pojo.OrderSetting">
     update t_ordersetting set number = #{number} where orderDate = #{orderDate}
 </update>
+
     <!--根据预约日期查询-->
     <select id="findCountByOrderDate" parameterType="java.util.Date" resultType="long">
     select count(*) from t_ordersetting where orderDate = #{orderDate}
 </select>
+    <!--根据预约日期查询出预约对象-->
+    <select id="findOrderSettingByOrderDate" resultType="com.itheima.health.pojo.OrderSetting">
+        SELECT * FROM `t_ordersetting` where orderDate = #{orderDate}
+    </select>
 
-
+    <!--预约成功的情况下，更新可预约人数加1-->
+    <update id="update">
+        update t_orderSetting set reservations=#{reservations} where orderDate=#{orderDate}
+    </update>
 </mapper>

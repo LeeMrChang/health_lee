@@ -1,5 +1,6 @@
 package com.itheima.health.dao;
 
+import com.itheima.health.pojo.Member;
 import com.itheima.health.pojo.OrderSetting;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -17,4 +18,7 @@ import java.util.List;
 @Repository
 public interface MemberDao {
 
+    Member findMemberByPhoneNumber(String telephone);
+
+    void add(Member member);
 }

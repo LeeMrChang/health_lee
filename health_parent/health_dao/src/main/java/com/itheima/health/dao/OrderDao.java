@@ -1,5 +1,10 @@
 package com.itheima.health.dao;
 
+import com.itheima.health.pojo.Order;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+
 /**
  * @ClassName:OrderDao
  * @Author：Mr.lee
@@ -7,5 +12,10 @@ package com.itheima.health.dao;
  * @TIME： 21:25
  * @Description: TODO
  */
+@Repository
 public interface OrderDao {
+
+    List<Order> findByOrderListByOrder(Order order);
+
+    void add(Order order);
 }

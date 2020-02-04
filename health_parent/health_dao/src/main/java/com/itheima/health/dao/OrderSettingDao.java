@@ -53,4 +53,7 @@ public interface OrderSettingDao {
     void editNumberByOrderDate(OrderSetting orderSetting);
 
 
+    OrderSetting findOrderSettingByOrderDate(Date orderDate);
+
+    void update(OrderSetting orderSetting);
 }

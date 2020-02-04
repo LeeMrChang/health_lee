@@ -4,6 +4,37 @@
 <mapper namespace="com.itheima.health.dao.OrderDao">
 
 
+    <!--根据order对象中的条件进行查询，判断预约是否重复-->
+    <select id="findByOrderListByOrder" resultType="com.itheima.health.pojo.Order">
+        SELECT * from t_order
+        <where>
+            <if test="id!=null">
+                and id = #{id}
+            </if>
+            <if test="memberId!=null">
+                and member_id=#{memberId}
+            </if>
+            <if test="orderDate!=null">
+                and orderDate=#{orderDate}
+            </if>
+            <if test="orderType!=null">
+                and orderType=#{orderType}
+            </if>
+            <if test="orderStatus!=null">
+                and orderStatus=#{orderStatus}
+            </if>
+            <if test="setmealId!=null">
+                and setmeal_id = #{setmealId}
+            </if>
+        </where>
+    </select>
 
-
+    <!--新增预约订单-->
+    <!--保存订单-->
+    <insert id="add">
+        <selectKey keyProperty="id" keyColumn="id" order="AFTER" resultType="int">
+            select last_insert_id()
+        </selectKey>
+        insert into t_order(member_id,orderDate,orderType,orderStatus,setmeal_id) values (#{memberId},#{orderDate},#{orderType},#{orderStatus},#{setmealId})
+    </insert>
 </mapper>

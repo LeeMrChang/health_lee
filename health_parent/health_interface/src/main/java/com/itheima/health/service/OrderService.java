@@ -1,5 +1,6 @@
 package com.itheima.health.service;
 
+import com.itheima.health.entity.Result;
 import com.itheima.health.pojo.OrderSetting;
 
 import java.util.List;
@@ -15,4 +16,5 @@ import java.util.Map;
 public interface OrderService {
 
 
+    Result submit(Map<String, Object> map) throws Exception;
 }
