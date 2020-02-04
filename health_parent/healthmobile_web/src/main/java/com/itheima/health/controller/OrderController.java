@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import redis.clients.jedis.JedisPool;
 
+
 import java.util.Map;
 
 /**
@@ -31,6 +32,19 @@ public class OrderController {
 
     @Reference
     private OrderService orderService;
+
+    @RequestMapping(value = "/findById",method = RequestMethod.POST)
+    public Result findById(Integer id){
+        Result result = null;
+        try {
+             result = orderService.findById(id);
+            return new Result(true,MessageConstant.QUERY_ORDER_SUCCESS,result.getData());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new Result(false, MessageConstant.QUERY_ORDER_FAIL);
+        }
+
+    }
 
     @RequestMapping(value = "/submit",method = RequestMethod.POST)
     public Result submit(@RequestBody Map<String,Object> map){

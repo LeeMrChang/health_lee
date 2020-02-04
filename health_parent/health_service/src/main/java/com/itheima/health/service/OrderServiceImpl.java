@@ -111,4 +111,22 @@ public class OrderServiceImpl implements OrderService {
         orderSettingDao.update(orderSetting);
         return new Result(true,MessageConstant.ORDER_SUCCESS,order);
     }
+
+    /**
+     * 查询成功预约的体检订单展示信息
+     * @param id
+     * @return
+     */
+    @Override
+    public Result findById(Integer id) throws Exception {
+        Map map = orderDao.findByOrderId(id);
+        if(map!=null){
+            Date orderDate = (Date) map.get("orderDate");
+            //日期转字符串做页面展示
+            String date2String = DateUtils.parseDate2String(orderDate);
+            map.put("orderDate",date2String);
+            return new Result(true,MessageConstant.QUERY_ORDER_SUCCESS,map);
+        }
+        return new Result(false,MessageConstant.QUERY_ORDER_FAIL);
+    }
 }

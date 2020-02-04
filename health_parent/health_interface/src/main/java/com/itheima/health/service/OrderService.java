@@ -17,4 +17,6 @@ public interface OrderService {
 
 
     Result submit(Map<String, Object> map) throws Exception;
+
+    Result findById(Integer id) throws Exception;
 }

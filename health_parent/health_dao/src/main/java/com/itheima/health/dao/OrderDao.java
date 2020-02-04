@@ -4,6 +4,7 @@ import com.itheima.health.pojo.Order;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @ClassName:OrderDao
@@ -18,4 +19,6 @@ public interface OrderDao {
     List<Order> findByOrderListByOrder(Order order);
 
     void add(Order order);
+
+    Map findByOrderId(Integer id);
 }
