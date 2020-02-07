@@ -8,6 +8,14 @@
         SELECT * from t_member where phoneNumber = #{telephone}
     </select>
 
+    <!--根据regTime查询在当前日期之前的所有会员
+                在xml文件中 ，<号需要转义”&lt;”
+                    >号需要转义”&gt;”
+                -->
+    <select id="findMemberCountBeforeDate" resultType="java.lang.Integer">
+        select count(id) from t_member where regTime &lt;= #{value}
+    </select>
+
     <!--新增会员-->
     <insert id="add">
         /*返回主键id，做表的关联添加需要用到*/
@@ -15,6 +23,7 @@
             select last_insert_id();
         </selectKey>
         insert into t_member(fileNumber,name,sex,idCard,phoneNumber,regTime,password,email,birthday,remark)
-         values (#{fileNumber},#{name},#{sex},#{idCard},#{phoneNumber},#{regTime},#{password},#{email},#{birthday},#{remark})
+        values
+        (#{fileNumber},#{name},#{sex},#{idCard},#{phoneNumber},#{regTime},#{password},#{email},#{birthday},#{remark})
     </insert>
 </mapper>

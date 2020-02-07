@@ -21,4 +21,6 @@ public interface MemberDao {
     Member findMemberByPhoneNumber(String telephone);
 
     void add(Member member);
+
+    Integer findMemberCountBeforeDate(String date);
 }
