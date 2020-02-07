@@ -20,7 +20,7 @@ import java.util.Date;
 import java.util.Map;
 
 /**
- * @ClassName:ValidateCodeController
+ * @ClassName:LoginController
  * @Author：Mr.lee
  * @DATE：2020/02/03
  * @TIME： 15:27

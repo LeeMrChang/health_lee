@@ -8,6 +8,7 @@ import com.itheima.health.entity.Result;
 import com.itheima.health.pojo.CheckItem;
 import com.itheima.health.service.CheckItemService;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -31,6 +32,7 @@ public class CheckItemController {
 
     //查询所有
     @RequestMapping("/findAll")
+
     public Result findAll(){
         List<CheckItem> checkItemList = checkItemService.findAll();
         if(checkItemList != null && checkItemList.size() > 0){
@@ -42,10 +44,11 @@ public class CheckItemController {
     }
 
 
-    /**
+    /**@PreAuthorize  添加SpringSecurity的权限校验的注解
      * 分页查询的操作
      */
     @RequestMapping(value = "/findPage",method = RequestMethod.POST)
+    @PreAuthorize("hasAuthority('CHECKITEM_QUERY')")
     public PageResult findPage(@RequestBody QueryPageBean queryPageBean){
 
         PageResult pageResult = checkItemService.queryPage(
@@ -76,8 +79,10 @@ public class CheckItemController {
 
     /**
      * 添加
+     *   @PreAuthorize  权限校验的注解
      */
     @RequestMapping(value = "/add",method = RequestMethod.POST)
+    @PreAuthorize("hasAuthority('CHECKITEM_ADD')")
     public Result add(@RequestBody CheckItem checkItem){
 
         try {
@@ -94,6 +99,7 @@ public class CheckItemController {
      * 修改
      */
     @RequestMapping("/edit")
+    @PreAuthorize("hasAuthority('CHECKITEM_EDIT')")
     public Result update(@RequestBody CheckItem checkItem){
 
         try {
@@ -110,6 +116,7 @@ public class CheckItemController {
      * 删除
      */
     @RequestMapping(value = "/delete",method = RequestMethod.GET)
+    @PreAuthorize("hasAuthority('CHECKITEM_DELETE')")
     public Result delete(Integer id){
 
         try {
