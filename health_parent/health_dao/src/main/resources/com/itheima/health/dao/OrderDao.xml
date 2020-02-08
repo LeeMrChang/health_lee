@@ -39,6 +39,14 @@
     where o.member_id=m.id and o.setmeal_id=s.id and o.id=#{id}
 </select>
 
+    <!--套餐统计-->
+    <select id="findSetmealCount" resultType="java.util.Map">
+        SELECT s.name,COUNT(o.`setmeal_id`) AS value FROM
+        t_order o,t_setmeal s WHERE
+        o.`setmeal_id`=s.`id`
+        GROUP BY s.`name`
+    </select>
+
 
     <!--新增预约订单-->
     <!--保存订单-->

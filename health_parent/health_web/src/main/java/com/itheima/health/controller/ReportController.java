@@ -4,6 +4,7 @@ import com.alibaba.dubbo.config.annotation.Reference;
 import com.itheima.health.constant.MessageConstant;
 import com.itheima.health.entity.Result;
 import com.itheima.health.service.MemberService;
+import com.itheima.health.service.OrderService;
 import com.itheima.health.utils.DateUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -25,6 +26,9 @@ public class ReportController {
 
     @Reference
     private MemberService memberService;
+
+    @Reference
+    private OrderService orderService;
 
     /**
      * 统计会员每月增长的报表
@@ -55,6 +59,33 @@ public class ReportController {
         } catch (Exception e) {
             e.printStackTrace();
             return new Result(false,MessageConstant.GET_MEMBER_NUMBER_REPORT_FAIL);
+        }
+    }
+
+    /**
+     * 套餐统计的饼状图统计
+     */
+    @RequestMapping(value = "/getSetmealReport",method = RequestMethod.GET)
+    public Result getSetmealReport(){
+
+        try {
+            //查询套餐统计的数据
+            List<Map<String,Object>> countMap = orderService.findSetmealCount();
+            //封装套餐名称的容器
+            List<String> list = new ArrayList<>();
+            for (Map<String, Object> map : countMap) {
+                //获取套餐名称
+                String name = (String) map.get("name");
+                list.add(name);
+            }
+            //添加套餐名称与套餐统计得到的count数据到map容器中
+            Map<String,Object> map = new HashMap<>();
+            map.put("setmealNames",list);
+            map.put("setmealCount",countMap);
+            return new Result(true,MessageConstant.GET_SETMEAL_COUNT_REPORT_SUCCESS,map);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new Result(true,MessageConstant.GET_SETMEAL_COUNT_REPORT_FAIL);
         }
     }
 }

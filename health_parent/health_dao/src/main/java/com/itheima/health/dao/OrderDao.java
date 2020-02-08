@@ -21,4 +21,7 @@ public interface OrderDao {
     void add(Order order);
 
     Map findByOrderId(Integer id);
+
+    List<Map<String, Object>> findSetmealCount();
+
 }

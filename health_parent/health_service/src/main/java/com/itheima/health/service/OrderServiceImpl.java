@@ -129,4 +129,13 @@ public class OrderServiceImpl implements OrderService {
         }
         return new Result(false,MessageConstant.QUERY_ORDER_FAIL);
     }
+
+    /**
+     * 套餐统计
+     * @return
+     */
+    @Override
+    public List<Map<String, Object>> findSetmealCount() {
+        return orderDao.findSetmealCount();
+    }
 }
