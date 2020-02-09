@@ -22,4 +22,6 @@ public interface OrderService {
 
     List<Map<String, Object>> findSetmealCount();
 
+    Map<String, Object> getBusinessReportData();
+
 }

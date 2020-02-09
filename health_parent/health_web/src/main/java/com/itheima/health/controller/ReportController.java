@@ -88,4 +88,19 @@ public class ReportController {
             return new Result(true,MessageConstant.GET_SETMEAL_COUNT_REPORT_FAIL);
         }
     }
+
+    /**
+     * 运营统计的接口
+     */
+    @RequestMapping(value = "/getBusinessReportData",method = RequestMethod.GET)
+    public Result getBusinessReportData(){
+
+        try {
+            Map<String,Object> map = orderService.getBusinessReportData();
+            return new Result(true,MessageConstant.GET_BUSINESS_REPORT_SUCCESS,map);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new Result(false,MessageConstant.GET_BUSINESS_REPORT_FAIL);
+        }
+    }
 }

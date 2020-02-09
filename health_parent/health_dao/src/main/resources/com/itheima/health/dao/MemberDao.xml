@@ -16,6 +16,22 @@
         select count(id) from t_member where regTime &lt;= #{value}
     </select>
 
+    <!--统计当前时间的会员总数-->
+    <select id="findMemberCountByDate" resultType="java.lang.Integer">
+        select count(id) from t_member where regTime = #{value}
+    </select>
+
+    <!--到目前为止，新增的会员总数-->
+    <select id="findMemberTotalCount" resultType="java.lang.Integer">
+        select count(id) from t_member
+    </select>
+
+    <!--本周新增会员总数-->
+    <!--根据日期统计会员数，统计指定日期之后的会员数,&gt; 表示大于-->
+    <select id="findMemberCountAfterDate" resultType="java.lang.Integer">
+        select count(id) from t_member where regTime &gt;= #{value}
+    </select>
+
     <!--新增会员-->
     <insert id="add">
         /*返回主键id，做表的关联添加需要用到*/

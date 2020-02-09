@@ -47,6 +47,39 @@
         GROUP BY s.`name`
     </select>
 
+    <!--统计今日新增会员预约数-->
+    <select id="findOrderCountByDate" resultType="java.lang.Integer">
+        select count(id) from t_order where orderDate = #{value}
+    </select>
+
+    <!--统计今日会员到诊数-->
+    <select id="findVisitsCountByDate" resultType="java.lang.Integer">
+        SELECT COUNT(id) FROM t_order WHERE orderDate = #{value} AND orderStatus = '已到诊'
+    </select>
+
+    <!--统计本周或者本月的预约统计数-->
+    <!--根据日期统计到诊数，统计指定日期之后的到诊数-->
+    <select id="findOrderCountBetweenDate" resultType="java.lang.Integer">
+        select count(id) from t_order where orderDate between #{begin} and #{end}
+    </select>
+
+    <!--统计本周、本月的到诊统计数-->
+    <!--根据日期统计到诊数，统计指定日期之后的到诊数-->
+    <select id="findVisitsCountAfterDate" resultType="java.lang.Integer">
+         select count(id) from t_order where orderDate &gt;= #{value} and orderStatus = '已到诊'
+    </select>
+
+    <!--查出前4个热门套餐的统计-->
+    <select id="findHotSetmeal" resultType="java.util.Map">
+        select
+        s.name,
+        count(o.id) setmeal_count ,
+        count(o.id)/(select count(id) from t_order) proportion
+        from t_order o inner join t_setmeal s on s.id = o.setmeal_id
+        group by s.name
+        order by setmeal_count desc
+        limit 0,4
+    </select>
 
     <!--新增预约订单-->
     <!--保存订单-->
